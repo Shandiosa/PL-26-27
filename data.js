@@ -72,7 +72,7 @@ function team(code) { return TEAM_BY_CODE[code] || null; }
 
 // ── Frist ────────────────────────────────────────────────────
 // PL 26/27 starter l\u00f8rdag 22. august 2026. Frist: fredagen f\u00f8r.
-const DEADLINE = new Date('2026-08-14T18:00:00');
+const DEADLINE = new Date('2026-08-21T18:00:00');
 
 // ── Admin-konto (kun denne får tilgang til adminpanel) ──────────
 const ADMIN_EMAIL = 'j.e.holmen@gmail.com';
