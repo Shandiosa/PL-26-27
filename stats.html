@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Statistikk – PL 26/27 Tippekonk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data.js"></script>
+<script src="store.js"></script>
+<script src="players.js"></script>
+<style>
+.stat-bar-wrap{background:var(--surface2);border-radius:4px;height:5px;margin-top:5px;overflow:hidden;}
+.stat-bar{height:100%;border-radius:4px;background:var(--acc);transition:width .4s cubic-bezier(.2,.8,.2,1);}
+.stat-entry{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
+.stat-entry:first-child{border-top:none;}
+.stat-rank{font-family:'Archivo';font-weight:900;font-size:16px;width:20px;text-align:center;color:var(--txt3);flex-shrink:0;}
+.stat-rank.r1{color:var(--gold);}
+.stat-rank.r2{color:#C8D2CC;}
+.stat-rank.r3{color:#CD7F32;}
+.stat-info{flex:1;min-width:0;}
+.stat-name{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.stat-pct{font-family:'Archivo';font-weight:900;font-size:18px;color:var(--acc);flex-shrink:0;min-width:46px;text-align:right;}
+.stat-section{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;}
+.stat-section-h{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.stat-section-emoji{width:38px;height:38px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.stat-section-title{font-weight:800;font-size:16px;}
+.stat-section-sub{font-size:12px;color:var(--txt2);}
+.no-subs{text-align:center;padding:60px 20px;color:var(--txt3);}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="ui.jsx"></script>
+<script type="text/babel" src="stats.jsx"></script>
+</body>
+</html>
