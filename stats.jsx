@@ -189,4 +189,4 @@ function TopBar({ user }) {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<StatsPage />);
+bootStore(() => ReactDOM.createRoot(document.getElementById('root')).render(<StatsPage />));

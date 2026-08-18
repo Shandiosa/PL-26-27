@@ -185,3 +185,9 @@ function getResults() {
 function saveResults(r) { lsSet(LS.RESULTS, r); }
 
 function isPastDeadline() { return getSettings().lockOverride || new Date() > DEADLINE; }
+
+// ── Oppstart ─────────────────────────────────────────────────
+// I localStorage-modus er alt klart med en gang. Supabase-adapteren
+// (supabase/store.supabase.js) overstyrer denne og venter på data først.
+function bootStore(render) { render(); }
+function refreshAll() {}

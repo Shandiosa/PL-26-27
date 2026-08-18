@@ -456,4 +456,4 @@ function AdminApp() {
     </div>
   );
 }
-ReactDOM.createRoot(document.getElementById('root')).render(<AdminApp />);
+bootStore(() => ReactDOM.createRoot(document.getElementById('root')).render(<AdminApp />));

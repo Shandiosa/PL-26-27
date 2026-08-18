@@ -54,7 +54,7 @@ function AuthScreen({ onAuthed }) {
   const [ok, setOk] = useState('');
   const [resetFav, setResetFav] = useState(null);
 
-  function submit() {
+  async function submit() {
     setErr(''); setOk('');
     if (mode === 'register') {
       if (!name.trim()) return setErr('Skriv inn navnet ditt.');
@@ -62,7 +62,7 @@ function AuthScreen({ onAuthed }) {
       if (pw.length < 4) return setErr('Passordet må ha minst 4 tegn.');
       if (pw !== pw2) return setErr('Passordene er ikke like.');
       if (!fav) return setErr('Velg favorittklubb – brukes også til å gjenopprette passord senere.');
-      const res = registerUser({ name, email, password: pw, favClub: fav });
+      const res = await registerUser({ name, email, password: pw, favClub: fav });
       if (!res.ok) return setErr(res.error);
       onAuthed(res.user);
     } else if (mode === 'reset') {
@@ -70,12 +70,12 @@ function AuthScreen({ onAuthed }) {
       if (!resetFav) return setErr('Velg favorittklubben du registrerte deg med.');
       if (pw.length < 4) return setErr('Nytt passord må ha minst 4 tegn.');
       if (pw !== pw2) return setErr('Passordene er ikke like.');
-      const res = resetPasswordWithSecurity({ email, favClub: resetFav, newPassword: pw });
+      const res = await resetPasswordWithSecurity({ email, favClub: resetFav, newPassword: pw });
       if (!res.ok) return setErr(res.error);
       setOk('Passord endret – du kan nå logge inn.');
       setMode('login'); setPw(''); setPw2('');
     } else {
-      const res = loginUser({ email, password: pw });
+      const res = await loginUser({ email, password: pw });
       if (!res.ok) return setErr(res.error);
       onAuthed(res.user);
     }
@@ -731,4 +731,4 @@ function App() {
   if (showPoeng)    return <PoengsystemScreen onBack={() => setShowPoeng(false)} />;
   return <Tipper user={user} onLogout={()=>{ logout(); setUser(null); setVippsAcked(false); }} onDonasjon={() => setShowDonasjon(true)} onPoeng={() => setShowPoeng(true)} />;
 }
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+bootStore(() => ReactDOM.createRoot(document.getElementById('root')).render(<App />));

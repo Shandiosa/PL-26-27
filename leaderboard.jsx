@@ -93,4 +93,4 @@ function Leaderboard() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<Leaderboard />);
+bootStore(() => ReactDOM.createRoot(document.getElementById('root')).render(<Leaderboard />));
