@@ -61,15 +61,23 @@ insert into settings (id) values (1) on conflict (id) do nothing;
 create or replace function handle_new_user()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
-  insert into profiles (id, email, name, fav_club, verified)
+  insert into profiles (id, email, name, fav_club, verified, is_admin)
   values (
     new.id,
     lower(new.email),
     coalesce(new.raw_user_meta_data->>'name', ''),
     new.raw_user_meta_data->>'fav_club',
-    new.email_confirmed_at is not null
+    new.email_confirmed_at is not null,
+    lower(new.email) = 'j.e.holmen@gmail.com'
   )
-  on conflict (id) do nothing;
+  on conflict (id) do update
+    set email    = excluded.email,
+        name     = case when profiles.name = '' then excluded.name else profiles.name end,
+        fav_club = coalesce(profiles.fav_club, excluded.fav_club);
+  return new;
+exception when others then
+  -- En feil her skal aldri blokkere registrering; appen lager profilen selv.
+  raise warning 'handle_new_user feilet for %: %', new.email, sqlerrm;
   return new;
 end $$;
 
@@ -145,6 +153,10 @@ create policy profiles_select on profiles for select to authenticated using (tru
 drop policy if exists profiles_update_self on profiles;
 create policy profiles_update_self on profiles for update to authenticated
   using (id = auth.uid()) with check (id = auth.uid());
+
+drop policy if exists profiles_insert_self on profiles;
+create policy profiles_insert_self on profiles for insert to authenticated
+  with check (id = auth.uid());
 
 drop policy if exists profiles_admin_all on profiles;
 create policy profiles_admin_all on profiles for all to authenticated

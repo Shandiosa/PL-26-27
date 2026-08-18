@@ -36,7 +36,18 @@
   async function refreshMe() {
     const { data:{ user } } = await sb.auth.getUser();
     if (!user) { C.me = null; return null; }
-    const { data:p } = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+    let { data:p } = await sb.from('profiles').select('*').eq('id', user.id).maybeSingle();
+    // Selv-reparasjon: mangler profilraden (trigger feilet), lager vi den her.
+    if (!p) {
+      const md = user.user_metadata || {};
+      const ins = await sb.from('profiles').insert({
+        id: user.id, email: (user.email || '').toLowerCase(),
+        name: md.name || '', fav_club: md.fav_club || null,
+        verified: !!user.email_confirmed_at,
+      }).select().maybeSingle();
+      p = ins.data;
+      if (ins.error) console.error('[store] kunne ikke opprette profil', ins.error.message);
+    }
     C.me = p ? { ...mapProfile(p), verified: !!user.email_confirmed_at || !!p.verified } : null;
     return C.me;
   }
@@ -103,7 +114,7 @@
     if (!data.session) return { ok:false, error:'Sjekk e-posten din og bekreft adressen – så kan du logge inn.' };
     const user = await refreshMe();
     await refreshAll();
-    return user ? { ok:true, user } : { ok:false, error:'Kontoen ble opprettet, men profilen mangler. Prøv å logge inn.' };
+    return user ? { ok:true, user } : { ok:false, error:'Kontoen ble opprettet, men profilen mangler. Logg inn på nytt.' };
   }
 
   async function loginUser({ email, password }) {
