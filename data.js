@@ -96,7 +96,7 @@ const MANAGERS = [
   { name:'Andoni Iraola',     team:'LIV' },   // NY – erstattet Slot
   { name:'Enzo Maresca',      team:'MCI' },   // NY – etterfulgte Guardiola
   { name:'Michael Carrick',   team:'MUN' },
-  { name:'Eddie Howe',        team:'NEW' },
+  { name:'Matthias Jaissle',  team:'NEW' },   // NY – erstattet Eddie Howe
   { name:'Oliver Glasner',    team:'NFO' },   // NY – fra juli 2026
   { name:'Régis Le Bris',     team:'SUN' },
   { name:'Roberto De Zerbi',  team:'TOT' },   // NY – inn mot slutten av 25/26

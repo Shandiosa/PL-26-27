@@ -402,7 +402,6 @@ const PLAYERS = [
   { name:'Yves Bissouma', team:'TOT', pos:'Midtbane' },
   { name:'Archie Gray', team:'TOT', pos:'Midtbane' },
   { name:'Wilson Odobert', team:'TOT', pos:'Kant' },
-  { name:'Cristian Romero', team:'TOT', pos:'Forsvar' },
   { name:'Micky van de Ven', team:'TOT', pos:'Forsvar' },
   { name:'Destiny Udogie', team:'TOT', pos:'Forsvar' },
   { name:'Pedro Porro', team:'TOT', pos:'Forsvar' },
