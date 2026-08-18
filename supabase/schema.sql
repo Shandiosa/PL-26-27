@@ -52,7 +52,7 @@ insert into results (id) values (1) on conflict (id) do nothing;
 create table if not exists settings (
   id            int primary key default 1 check (id = 1),
   lock_override boolean not null default false,
-  deadline      timestamptz not null default '2026-08-14T18:00:00+02',
+  deadline      timestamptz not null default '2026-08-21T18:00:00+02',
   updated_at    timestamptz not null default now()
 );
 insert into settings (id) values (1) on conflict (id) do nothing;
