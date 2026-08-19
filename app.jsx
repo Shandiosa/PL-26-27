@@ -562,6 +562,39 @@ function Tipper({ user, onLogout, onDonasjon, onPoeng }) {
   );
 }
 
+// ── Vipps-nummer (kopier) ────────────────────────────────────
+const VIPPS_NR = '45441656';
+function VippsNummer({ label = 'Kopier Vipps-nummer' }) {
+  const [copied, setCopied] = useState(false);
+  function copy() {
+    const done = () => { setCopied(true); setTimeout(() => setCopied(false), 2000); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(VIPPS_NR).then(done).catch(done);
+    } else {
+      const t = document.createElement('textarea');
+      t.value = VIPPS_NR; document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t); done();
+    }
+  }
+  return (
+    <button
+      onClick={copy}
+      className="btn btn-block"
+      style={{
+        background:'#FF5B24',color:'#fff',border:'none',cursor:'pointer',
+        display:'flex',alignItems:'center',justifyContent:'center',gap:10,
+        fontSize:16,fontWeight:800,padding:'14px 20px',borderRadius:10,marginBottom:12
+      }}
+    >
+      <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+        <path d="M10 42 C17 42 24 18 33 18 C40 18 40 32 47 32 C54 32 55 22 55 22" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+      {copied ? 'Kopiert: ' + VIPPS_NR : label + ' ' + VIPPS_NR}
+    </button>
+  );
+}
+
 // ── DonasjonScreen ───────────────────────────────────────────
 function DonasjonScreen({ onBack }) {
   return (
@@ -582,23 +615,17 @@ function DonasjonScreen({ onBack }) {
           hosting av side og administrering av konkurransen.
         </div>
 
-        <a
-          href="https://qr.vipps.no/28/2/01/031/4745441656?v=1"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-block"
-          style={{
-            background:'#FF5B24',color:'#fff',border:'none',
-            display:'flex',alignItems:'center',justifyContent:'center',gap:10,
-            fontSize:16,fontWeight:800,padding:'14px 20px',borderRadius:10,
-            textDecoration:'none',marginBottom:20
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
-            <path d="M10 42 C17 42 24 18 33 18 C40 18 40 32 47 32 C54 32 55 22 55 22" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Frivillig donasjon
-        </a>
+        <div style={{display:'flex',justifyContent:'center',marginBottom:16}}>
+          <div style={{background:'#fff',padding:10,borderRadius:12,border:'1px solid var(--line)'}}>
+            <img src="assets/vipps_qr.jpg" alt="Vipps QR-kode" style={{width:180,height:180,objectFit:'contain',display:'block',borderRadius:6}} />
+          </div>
+        </div>
+
+        <VippsNummer />
+
+        <div style={{fontSize:12,color:'var(--txt3)',textAlign:'center',marginBottom:20,lineHeight:1.6}}>
+          Scan QR-koden med kameraet, eller søk opp nummeret i Vipps-appen.
+        </div>
 
         <button className="btn btn-ghost btn-block" style={{fontSize:14}} onClick={onBack}>
           ← Tilbake
@@ -672,28 +699,10 @@ function VippsWelcome({ user, onContinue }) {
 
         </div>
 
-        {/* Vipps-knapp som åpner appen direkte via universallink */}
-        <a
-          href="https://qr.vipps.no/28/2/01/031/4745441656?v=1"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-block"
-          style={{
-            background:'#FF5B24',color:'#fff',border:'none',
-            display:'flex',alignItems:'center',justifyContent:'center',gap:10,
-            fontSize:16,fontWeight:800,padding:'14px 20px',borderRadius:10,
-            textDecoration:'none',marginBottom:8
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
-            <path d="M10 42 C17 42 24 18 33 18 C40 18 40 32 47 32 C54 32 55 22 55 22" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Betal kr. 50,- i Vipps
-        </a>
+        <VippsNummer label="Vipps kr. 50,- til" />
 
         <div style={{fontSize:11,color:'var(--txt3)',textAlign:'center',marginBottom:14,lineHeight:1.5}}>
-          Åpner Vipps-appen direkte med mottaker utfylt.<br/>
-          Eller scan QR-koden over med kameraet ditt.
+          Scan QR-koden over med kameraet, eller søk opp nummeret i Vipps-appen.
         </div>
 
         <button
