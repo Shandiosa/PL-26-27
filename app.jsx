@@ -595,6 +595,37 @@ function VippsNummer({ label = 'Kopier Vipps-nummer' }) {
   );
 }
 
+function VippsApne() {
+  const [state, setState] = useState('idle');
+  function go() {
+    const nr = VIPPS_NR;
+    if (navigator.clipboard && navigator.clipboard.writeText) { try { navigator.clipboard.writeText(nr); } catch (e) {} }
+    setState('copied');
+    const mobil = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (mobil) { setTimeout(() => { window.location.href = 'vipps://'; }, 120); }
+    setTimeout(() => setState('idle'), 3500);
+  }
+  return (
+    <>
+      <button onClick={go} className="btn btn-block" style={{
+        background:'#FF5B24',color:'#fff',border:'none',cursor:'pointer',
+        display:'flex',alignItems:'center',justifyContent:'center',gap:10,
+        fontSize:16,fontWeight:800,padding:'14px 20px',borderRadius:10,marginBottom:10
+      }}>
+        <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
+          <path d="M10 42 C17 42 24 18 33 18 C40 18 40 32 47 32 C54 32 55 22 55 22" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        {state === 'copied' ? 'Nummer kopiert – åpner Vipps…' : 'Åpne Vipps og kopier nummer'}
+      </button>
+      <div style={{fontSize:12,color:'var(--txt3)',textAlign:'center',marginBottom:20,lineHeight:1.6}}>
+        Trykk <b style={{color:'var(--txt2)'}}>Send</b> i Vipps og lim inn nummeret
+        (<b style={{color:'var(--txt2)'}}>{VIPPS_NR}</b>) – det ligger allerede på utklippstavla.
+        <br/>På PC: scan QR-koden over med mobilkameraet.
+      </div>
+    </>
+  );
+}
+
 // ── DonasjonScreen ───────────────────────────────────────────
 function DonasjonScreen({ onBack }) {
   return (
@@ -621,11 +652,7 @@ function DonasjonScreen({ onBack }) {
           </div>
         </div>
 
-        <VippsNummer />
-
-        <div style={{fontSize:12,color:'var(--txt3)',textAlign:'center',marginBottom:20,lineHeight:1.6}}>
-          Scan QR-koden med kameraet, eller søk opp nummeret i Vipps-appen.
-        </div>
+        <VippsApne />
 
         <button className="btn btn-ghost btn-block" style={{fontSize:14}} onClick={onBack}>
           ← Tilbake
