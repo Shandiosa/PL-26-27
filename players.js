@@ -1,6 +1,6 @@
 // ============================================================
 //  Premier League 26/27 – Spillere for autocomplete
-//  Oppdatert 18. august 2026 – alle 20 klubber gjennomgått (vinduet stenger 1. sept)
+//  Oppdatert 19. august 2026 – alle 20 klubber gjennomgått (vinduet stenger 1. sept)
 //  Listen er et utgangspunkt – deltakere kan også skrive fritt.
 // ============================================================
 
@@ -105,7 +105,6 @@ const PLAYERS = [
   { name:'Mats Wieffer', team:'BHA', pos:'Midtbane' },
   { name:'Jack Hinshelwood', team:'BHA', pos:'Midtbane' },
   { name:'Brajan Gruda', team:'BHA', pos:'Kant' },
-  { name:'Julio Enciso', team:'BHA', pos:'Kant' },
   { name:'Ferdi Kadıoğlu', team:'BHA', pos:'Forsvar' },
   { name:'Joel Veltman', team:'BHA', pos:'Forsvar' },
   { name:'Adam Webster', team:'BHA', pos:'Forsvar' },
@@ -159,6 +158,7 @@ const PLAYERS = [
   { name:'Jay Dasilva', team:'COV', pos:'Forsvar' },
   { name:'Victor Torp', team:'COV', pos:'Midtbane' },
   // Crystal Palace
+  { name:'Anan Khalaili', team:'CRY', pos:'Kant' },
   { name:'Jean-Philippe Mateta', team:'CRY', pos:'Spiss' },
   { name:'Ismaïla Sarr', team:'CRY', pos:'Kant' },
   { name:'Adam Wharton', team:'CRY', pos:'Midtbane' },
@@ -216,6 +216,7 @@ const PLAYERS = [
   { name:'Kenny Tete', team:'FUL', pos:'Forsvar' },
   { name:'Ryan Sessegnon', team:'FUL', pos:'Forsvar' },
   // Hull
+  { name:'Lucas Gourna-Douath', team:'HUL', pos:'Midtbane' },
   { name:'Enis Destan', team:'HUL', pos:'Spiss' },
   { name:'Hidemasa Morita', team:'HUL', pos:'Midtbane' },
   { name:'Oscar Zambrano', team:'HUL', pos:'Midtbane' },
@@ -231,6 +232,8 @@ const PLAYERS = [
   { name:'Kasey Palmer', team:'HUL', pos:'Midtbane' },
   { name:'Mason Burstow', team:'HUL', pos:'Spiss' },
   // Ipswich
+  { name:'Julio Enciso', team:'IPS', pos:'Kant' },
+  { name:'Abdoul Ouattara', team:'IPS', pos:'Kant' },
   { name:'Emersonn', team:'IPS', pos:'Spiss' },
   { name:'Chuba Akpom', team:'IPS', pos:'Spiss' },
   { name:'Daizen Maeda', team:'IPS', pos:'Kant' },
@@ -296,7 +299,6 @@ const PLAYERS = [
   { name:'Jérémy Doku', team:'MCI', pos:'Kant' },
   { name:'Savinho', team:'MCI', pos:'Kant' },
   { name:'Elliot Anderson', team:'MCI', pos:'Midtbane' },
-  { name:'Rodri', team:'MCI', pos:'Midtbane' },
   { name:'Jeremy Monga', team:'MCI', pos:'Kant' },
   { name:'Bernardo Silva', team:'MCI', pos:'Midtbane' },
   { name:'Tijjani Reijnders', team:'MCI', pos:'Midtbane' },
